@@ -2,26 +2,33 @@
   <div class="card">
     <div class="card-header">
       <h2 class="card-title">5-Day Weather hourly Forecast</h2>
-      <h6>* Hourly Weather Forecast: because Minute-by-Minute is not allowed in free tier</h6>
+      <h6>* Hourly Weather Forecast: because Minute-by-Minute is not allowed in the free tier</h6>
     </div>
     <div class="card-body">
-      <div *ngIf="dailyForecasts.length > 0">
-        <ul class="nav nav-pills mb-3">
-          <li class="nav-item" *ngFor="let day of dailyForecasts; let i = index">
-            <a class="nav-link" [class.active]="i === selectedDay" (click)="selectDay(i)">{{ day.date | date: 'EEE, MMM d' }}</a>
-          </li>
-        </ul>
-        <div class="row">
-          <div class="col-12 col-md-6" *ngFor="let interval of selectedDayForecast">
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">{{ interval.startTime | date: 'mediumTime' }}</h5>
-                <p class="card-text">{{ interval.values.temperature }}°C</p>
+      <ng-container *ngIf="weatherStateService.getState() === 'loading'; else loaded">
+        <p>Loading...</p>
+      </ng-container>
+      <ng-template #loaded>
+        <div *ngIf="dailyForecasts.length > 0">
+          <ul class="nav nav-pills mb-3">
+            <li class="nav-item" *ngFor="let day of dailyForecasts; let i = index">
+              <a class="nav-link" [class.active]="i === selectedDay" (click)="selectDay(i)">
+                {{ day.date | date: 'EEE, MMM d' }}
+              </a>
+            </li>
+          </ul>
+          <div class="row">
+            <div class="col-12 col-md-6" *ngFor="let interval of selectedDayForecast">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{ interval.startTime | date: 'mediumTime' }}</h5>
+                  <p class="card-text">{{ interval.values.temperature }}°C</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   </div>
 </div>
