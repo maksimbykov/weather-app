@@ -1,1 +1,8 @@
-<p>weather works!</p>
+<div *ngIf="hourlyForecast">
+    <h2>Hourly Weather Forecast</h2>
+    <h6>* because Minute-by-Minute is not allowed in free tier</h6>
+    <div *ngFor="let interval of hourlyForecast">
+      <p>{{ interval.startTime | date: 'mediumTime' }} :  {{ interval.values.temperature }}°C</p>
+    </div>
+</div>
+  
