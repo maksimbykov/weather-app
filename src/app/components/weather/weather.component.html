@@ -1,8 +1,8 @@
 <div class="container mt-4">
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title">5-Day Weather hourly Forecast</h2>
-      <h6>* Hourly Weather Forecast: because Minute-by-Minute is not allowed in the free tier</h6>
+      <h2  i18n="@@heading" class="card-title">5-Day Weather hourly Forecast</h2>
+      <h6  i18n="@@subHeading">* Hourly Weather Forecast: because Minute-by-Minute is not allowed in the free tier</h6>
     </div>
     <div class="card-body">
       <ng-container *ngIf="weatherStateService.getState() === 'loading'; else loaded">
